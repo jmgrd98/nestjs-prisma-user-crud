@@ -1,12 +1,35 @@
+import { UserDto } from './entities/user.entity';
+import { PrismaService } from './../../database/PrismaService';
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
-  }
+
+  constructor(
+    private prisma: PrismaService
+    ) {}
+     
+
+  async create(data: CreateUserDto) {
+
+    const userExists = await this.prisma.user.findFirst({
+      where: {
+        name: data.name,
+      },
+    });
+
+    if (userExists) {
+      throw new Error('User already exists!');
+    }
+
+    const user = await this.prisma.user.create({
+      data,
+    });
+
+    return user;
+  };
 
   findAll() {
     return `This action returns all users`;
