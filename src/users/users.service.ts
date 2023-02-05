@@ -1,4 +1,3 @@
-import { UserDto } from './entities/user.entity';
 import { PrismaService } from './../../database/PrismaService';
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -24,15 +23,15 @@ export class UsersService {
       throw new Error('User already exists!');
     }
 
-    const user = await this.prisma.user.create({
-      createUserDto,
-    });
+    // const user = await this.prisma.user.create({
+    //   data,
+    // });
 
-    return user;
-  };
+    // return user;
+  }
 
   findAll() {
-    return `This action returns all users`;
+    return this.prisma.user.findMany();
   }
 
   findOne(id: number) {
