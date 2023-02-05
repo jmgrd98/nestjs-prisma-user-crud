@@ -12,11 +12,11 @@ export class UsersService {
     ) {}
      
 
-  async create(data: CreateUserDto) {
+  async create(createUserDto: CreateUserDto) {
 
     const userExists = await this.prisma.user.findFirst({
       where: {
-        name: data.name,
+        name: createUserDto.name,
       },
     });
 
@@ -24,11 +24,11 @@ export class UsersService {
       throw new Error('User already exists!');
     }
 
-    const user = await this.prisma.user.create({
-      data,
-    });
+    // const user = await this.prisma.user.create({
+    //   createUserDto,
+    // });
 
-    return user;
+    // return user;
   };
 
   findAll() {
