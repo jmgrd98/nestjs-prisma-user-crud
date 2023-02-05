@@ -1,5 +1,14 @@
+import {IsString, IsEmail, MinLength, IsUppercase} from 'class-validator';
+
 export class UserDto {
-  name: string;
-  email: string;
-  password: string;
+
+    @IsString()
+    name: string;
+  
+    @IsEmail()
+    email: string;
+  
+    @MinLength(6)
+    @IsUppercase()
+    password: string;
 }

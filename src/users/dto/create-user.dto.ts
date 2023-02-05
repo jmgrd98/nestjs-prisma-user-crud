@@ -1,5 +1,5 @@
-import { IsString } from "class-validator";
-import { IsEmail, IsUppercase, MinLength } from "class-validator/types/decorator/decorators";
+import { IsString } from 'class-validator';
+import { IsEmail, IsUppercase, MinLength } from 'class-validator';
 export class CreateUserDto {
 
   @IsString()
@@ -9,6 +9,6 @@ export class CreateUserDto {
   email: string;
 
   @MinLength(6)
-  @IsUppercase(1)
+  @IsUppercase()
   password: string;
 }
