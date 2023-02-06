@@ -34,11 +34,23 @@ export class UsersService {
     return this.prisma.user.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string) {
+
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!user) {
+      throw new Error('User already exists!');
+    }
+
+    return user;
+
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  async update(id: string, updateUserDto: UpdateUserDto) {
 
     const userExists = await this.prisma.user.findUnique({
       where: {
@@ -58,7 +70,7 @@ export class UsersService {
     })
   }
 
-  remove(id: number) {
+  async remove(id: string) {
     return `This action removes a #${id} user`;
   }
 }
