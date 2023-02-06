@@ -60,15 +60,15 @@ export class UsersService {
 
     if(!userExists) {
       throw new Error('User does not exists!');
-    }
+    };
 
     return await this.prisma.user.update({
       data: updateUserDto,
       where: {
         id: updateUserDto.id
       }
-    })
-  }
+    });
+  };
 
   async remove(id: string) {
 
