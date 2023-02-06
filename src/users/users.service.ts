@@ -38,8 +38,24 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+
+    const userExists = await this.prisma.user.findUnique({
+      where: {
+        id: updateUserDto.id,
+      },
+    });
+
+    if(!userExists) {
+      throw new Error('User does not exists!');
+    }
+
+    return await this.prisma.user.update({
+      data: updateUserDto,
+      where: {
+        id: updateUserDto.id
+      }
+    })
   }
 
   remove(id: number) {
