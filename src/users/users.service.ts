@@ -71,6 +71,6 @@ export class UsersService {
   }
 
   async remove(id: string) {
-    return `This action removes a #${id} user`;
+    return this.prisma.user.delete(id);
   }
 }
