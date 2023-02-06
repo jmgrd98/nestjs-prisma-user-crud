@@ -23,11 +23,11 @@ export class UsersService {
       throw new Error('User already exists!');
     }
 
-    // const user = await this.prisma.user.create({
-    //   data,
-    // });
+    const user = await this.prisma.user.create({
+      data: createUserDto,
+    });
 
-    // return user;
+    return user;
   }
 
   findAll() {

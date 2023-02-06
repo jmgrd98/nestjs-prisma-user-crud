@@ -9,6 +9,5 @@ export class CreateUserDto {
   email: string;
 
   @MinLength(6)
-  @IsUppercase()
   password: string;
 }
